@@ -1,13 +1,15 @@
 MODULE_PATH := github.com/blumsicle/reqserv
-APP_NAME := $(shell basename $(MODULE_PATH))
+APP_NAME    := $(shell basename $(MODULE_PATH))
 
-BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+BRANCH  := $(shell git rev-parse --abbrev-ref HEAD)
 VERSION := $(shell basename $(BRANCH))
-COMMIT := $(shell git rev-parse --short HEAD)
+COMMIT  := $(shell git rev-parse --short HEAD)
 
-LDFLAGS ?= '-X $(MODULE_PATH)/cmd.Name=$(APPNAME) -X $(MODULE_PATH)/cmd.Version=$(VERSION) -X $(MODULE_PATH)/cmd.Commit=$(COMMIT)'
+LDFLAGS ?= '-X $(MODULE_PATH)/cmd.Name=$(APP_NAME)  \
+		   -X $(MODULE_PATH)/cmd.Version=$(VERSION) \
+		   -X $(MODULE_PATH)/cmd.Commit=$(COMMIT)'
 
-SRC_PATH := .
+SRC_PATH  := .
 DEST_PATH := ./bin/$(APP_NAME)-$(VERSION)
 
 install: generate
@@ -16,4 +18,4 @@ install: generate
 generate:
 	go generate ./...
 
-
+.PHONY: install generate
