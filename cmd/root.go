@@ -31,9 +31,16 @@ import (
 
 var cfgFile string
 
+var (
+	Name    string
+	Version string
+	Commit  string
+)
+
 var rootCmd = &cobra.Command{
-	Use:   "reqserv",
-	Short: "A simple server to send response containing request headers, query params, and payload",
+	Use:     Name,
+	Short:   "A simple server to send response containing request headers, query params, and payload",
+	Version: Version + " " + Commit,
 }
 
 func Execute() {
